@@ -1,0 +1,2309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Linda's Round 2 Kitchen Survey</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Round 2 survey for the Pantry Tracker project — for Linda Lemos.">
+<meta name="theme-color" content="#ffffff">
+
+<!-- MBLW Brand Fonts (with safe offline fallbacks) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/barlow@5.0.13/400.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/barlow@5.0.13/500.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/open-sans@5.0.29/400.css" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/open-sans@5.0.29/500.css" crossorigin="anonymous">
+
+<style>
+/* ========================================================
+   MBLW Designs Tokens — light first, dark mode via attr
+   ======================================================== */
+:root {
+  --bg: #ffffff;
+  --surface: #f5f5f7;
+  --surface-raised: #ffffff;
+  --border: #e8e8ed;
+  --text: #1d1d1f;
+  --sub: #6e6e73;
+  --mid: #aeaeb2;
+  --cobalt: #0056b8;
+  --cobalt-text: #0056b8;
+  --orange: #ff6a13;
+  --emerald: #34a853;
+  --emerald-text: #34a853;
+  --danger: #e53935;
+  --violet: #6e5bbf;
+  --cyan: #3a9cc0;
+  --font-heading: 'Bahnschrift', 'Barlow', Arial, sans-serif;
+  --font-body: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  --shadow-focus: 0 0 0 3px rgba(0, 86, 184, 0.18);
+}
+[data-theme="dark"] {
+  --bg: #161618;
+  --surface: #242426;
+  --surface-raised: #2b2b2e;
+  --border: #38383a;
+  --text: #f5f5f7;
+  --sub: #98989d;
+  --mid: #636366;
+  --cobalt-text: #1667c2;
+  --emerald: #4ec96e;
+  --emerald-text: #4ec96e;
+  --danger: #ff6b6b;
+  --violet: #8a7ad4;
+  --cyan: #55b8d9;
+  --shadow-focus: 0 0 0 3px rgba(22, 103, 194, 0.35);
+}
+
+/* ========================================================
+   Reset + base
+   ======================================================== */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.55;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  margin: 0;
+}
+
+/* ========================================================
+   Shell / Topbar
+   ======================================================== */
+.shell {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 22px 18px 40px;
+}
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid var(--border);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.brand { flex: 1; min-width: 220px; }
+.brand-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+}
+.brand-title {
+  font-size: 22px;
+  color: var(--text);
+  margin: 3px 0 2px;
+  line-height: 1.2;
+}
+.brand-ver {
+  font-size: 11px;
+  color: var(--sub);
+  font-family: var(--font-heading);
+  letter-spacing: 0.06em;
+}
+.topbar-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.icon-btn {
+  background: transparent;
+  border: 0.5px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.icon-btn:hover { background: var(--surface); border-color: var(--mid); }
+
+/* ========================================================
+   Stepper
+   ======================================================== */
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  margin-bottom: 22px;
+}
+.stepper-pill {
+  border: 0.5px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 10px 4px 8px;
+  text-align: center;
+  cursor: pointer;
+  color: var(--sub);
+  font-family: var(--font-heading);
+  transition: border-color 0.12s, background 0.12s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.stepper-pill:hover { border-color: var(--mid); }
+.stepper-pill .num {
+  font-size: 14px;
+  color: var(--text);
+  font-weight: 500;
+}
+.stepper-pill .lbl {
+  font-size: 10px;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  font-family: var(--font-body);
+  padding: 0 2px;
+}
+.stepper-pill .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mid);
+  margin-top: 2px;
+}
+.stepper-pill.status-complete {
+  border-color: var(--emerald);
+  color: var(--emerald-text);
+}
+.stepper-pill.status-complete .num,
+.stepper-pill.status-complete .lbl { color: var(--emerald-text); }
+.stepper-pill.status-complete .dot { background: var(--emerald); }
+.stepper-pill.status-incomplete {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+.stepper-pill.status-incomplete .num,
+.stepper-pill.status-incomplete .lbl { color: var(--danger); }
+.stepper-pill.status-incomplete .dot { background: var(--danger); }
+.stepper-pill.is-current {
+  border-color: var(--cobalt);
+  border-width: 1.5px;
+  padding: 9px 3px 7px;
+  background: rgba(0, 86, 184, 0.07);
+}
+[data-theme="dark"] .stepper-pill.is-current {
+  background: rgba(22, 103, 194, 0.18);
+}
+.stepper-pill.is-current .num { color: var(--cobalt-text); }
+
+/* ========================================================
+   Section
+   ======================================================== */
+.section-head {
+  margin-bottom: 18px;
+}
+.section-eyebrow {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.section-title {
+  font-size: 26px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.section-sub {
+  font-size: 13px;
+  color: var(--sub);
+}
+.section-intro {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-left: 3px solid var(--cobalt);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 24px;
+  font-style: italic;
+  color: var(--text);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* ========================================================
+   Question cards
+   ======================================================== */
+.q-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 18px 18px;
+  margin-bottom: 14px;
+  scroll-margin-top: 16px;
+}
+.q-card.flash {
+  border-color: var(--danger);
+  animation: flash-border 0.8s ease-out;
+}
+@keyframes flash-border {
+  0%   { box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.28); }
+  100% { box-shadow: 0 0 0 0 rgba(229, 57, 53, 0); }
+}
+.q-num {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cobalt-text);
+}
+.q-title {
+  font-size: 17px;
+  color: var(--text);
+  margin: 2px 0 8px;
+  line-height: 1.3;
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+.q-prompt {
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 12px;
+  white-space: pre-wrap;
+}
+
+/* ========================================================
+   Inputs
+   ======================================================== */
+textarea, input[type="text"] {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 16px; /* iOS no-zoom */
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color 0.12s, box-shadow 0.12s;
+}
+textarea { min-height: 110px; }
+textarea:focus, input[type="text"]:focus {
+  outline: none;
+  border-color: var(--cobalt);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Radio group */
+.opt-group { display: flex; flex-direction: column; gap: 8px; }
+.opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 12px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: border-color 0.12s, background 0.12s;
+  user-select: none;
+}
+.opt:hover { border-color: var(--mid); }
+.opt.checked {
+  border-color: var(--cobalt);
+  background: rgba(0, 86, 184, 0.06);
+}
+[data-theme="dark"] .opt.checked {
+  background: rgba(22, 103, 194, 0.16);
+}
+.opt input {
+  margin: 4px 0 0 0;
+  accent-color: var(--cobalt);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.opt .opt-main { flex: 1; min-width: 0; }
+.opt .lbl { font-size: 15px; color: var(--text); }
+.opt .sub {
+  color: var(--sub);
+  font-size: 12.5px;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+.combo-caption {
+  font-size: 12px;
+  color: var(--sub);
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-style: italic;
+}
+
+/* ========================================================
+   Nav / buttons
+   ======================================================== */
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 0.5px solid var(--border);
+  flex-wrap: wrap;
+}
+.nav-btn {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 11px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 0;
+  letter-spacing: 0.02em;
+  transition: filter 0.12s, background 0.12s;
+}
+.btn-primary { background: var(--cobalt); color: #fff; }
+.btn-secondary {
+  background: transparent;
+  color: var(--orange);
+  border: 1.5px solid var(--orange);
+  padding: 10px 18.5px; /* compensate for border */
+}
+.btn-success { background: var(--emerald); color: #fff; }
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 0.5px solid var(--border);
+  padding: 10.5px 18.5px;
+}
+.nav-btn:not(:disabled):hover { filter: brightness(0.94); }
+.nav-btn:disabled {
+  background: var(--mid);
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.55;
+  border-color: transparent;
+}
+.btn-secondary:disabled { background: transparent; color: var(--mid); border-color: var(--mid); }
+.nav-btn.hidden { visibility: hidden; }
+
+/* Autosave indicator */
+.autosave {
+  font-size: 11px;
+  color: var(--sub);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-heading);
+  letter-spacing: 0.04em;
+}
+.autosave .pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--emerald);
+  transition: background 0.2s;
+}
+.autosave.saving .pulse { background: var(--orange); }
+
+/* ========================================================
+   Validation / Output panels
+   ======================================================== */
+.validation-panel {
+  background: var(--surface);
+  border: 0.5px solid var(--danger);
+  border-left: 3px solid var(--danger);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-top: 18px;
+  color: var(--text);
+}
+.validation-panel h3 {
+  color: var(--danger);
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+.validation-panel p { font-size: 14px; margin: 6px 0; }
+.validation-panel ul { margin: 10px 0 4px; padding-left: 20px; font-size: 14px; }
+.validation-panel li { margin-bottom: 4px; }
+.validation-panel a {
+  color: var(--cobalt-text);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+.validation-panel a:hover { text-decoration: underline; }
+
+.output-panel {
+  background: var(--surface);
+  border: 0.5px solid var(--emerald);
+  border-left: 3px solid var(--emerald);
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 18px;
+}
+.output-panel h3 {
+  color: var(--emerald-text);
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+.output-panel p { font-size: 14px; margin: 6px 0 14px; color: var(--text); }
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ========================================================
+   Footer
+   ======================================================== */
+.footer {
+  margin-top: 34px;
+  padding-top: 16px;
+  border-top: 0.5px solid var(--border);
+  text-align: center;
+  color: var(--sub);
+  font-size: 11px;
+  line-height: 1.6;
+}
+.footer .credit {
+  font-style: italic;
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+/* ========================================================
+   Toast
+   ======================================================== */
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  padding: 11px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: var(--font-body);
+  max-width: 90%;
+  text-align: center;
+  border: 0.5px solid var(--border);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+  z-index: 1000;
+}
+.toast.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* ========================================================
+   PIN Gate
+   ======================================================== */
+#pinGate {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.pin-card {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 36px 28px 26px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+.pin-logo {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.pin-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+.pin-sub {
+  color: var(--sub);
+  font-size: 14px;
+  margin: 0 0 24px;
+}
+.pin-inputs {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+.pin-digit {
+  width: 38px;
+  height: 50px;
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 22px;
+  text-align: center;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+.pin-digit::-webkit-outer-spin-button,
+.pin-digit::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.pin-digit:focus {
+  outline: none;
+  border-color: var(--cobalt);
+  box-shadow: var(--shadow-focus);
+}
+.pin-digit.filled { border-color: var(--cobalt); }
+.pin-error {
+  color: var(--danger);
+  font-size: 13px;
+  min-height: 20px;
+  margin-bottom: 8px;
+}
+.pin-card.shake { animation: shake 0.42s; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+.pin-footer {
+  color: var(--sub);
+  font-size: 11px;
+  margin-top: 10px;
+  font-style: italic;
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+@media (max-width: 440px) {
+  .pin-digit { width: 32px; height: 46px; font-size: 19px; }
+  .pin-inputs { gap: 4px; }
+}
+
+/* ========================================================
+   Review Page
+   ======================================================== */
+.review-head { margin-bottom: 22px; }
+.review-head .eyebrow {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+}
+.review-head h2 {
+  font-size: 26px;
+  margin: 4px 0 6px;
+  color: var(--text);
+}
+.review-head p {
+  font-size: 14px;
+  color: var(--sub);
+  margin: 0;
+  line-height: 1.55;
+}
+.review-section { margin-bottom: 24px; }
+.review-section-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--cobalt-text);
+  padding: 6px 0 10px;
+  margin-bottom: 12px;
+  border-bottom: 0.5px solid var(--border);
+}
+.review-q {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.review-q-num {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cobalt-text);
+}
+.review-q-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 16px;
+  margin: 2px 0 8px;
+  color: var(--text);
+}
+.review-q-prompt {
+  color: var(--sub);
+  font-size: 13px;
+  font-style: italic;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px dashed var(--border);
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+.review-q-answer {
+  font-size: 14.5px;
+  color: var(--text);
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+.review-q-answer.empty { color: var(--sub); font-style: italic; }
+.review-combo-label {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  color: var(--sub);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 6px 0 5px;
+  font-weight: 500;
+}
+.review-combo-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.review-chip {
+  background: rgba(0, 86, 184, 0.08);
+  color: var(--cobalt-text);
+  border: 0.5px solid var(--cobalt);
+  border-radius: 999px;
+  padding: 4px 11px;
+  font-size: 12px;
+  font-family: var(--font-heading);
+  font-weight: 500;
+}
+[data-theme="dark"] .review-chip { background: rgba(22, 103, 194, 0.22); }
+.review-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 0.5px solid var(--border);
+}
+.review-actions .nav-btn { flex: 1 1 170px; }
+
+/* ========================================================
+   Welcome Modal (Claude's voice — Slate Violet accent)
+   ======================================================== */
+.welcome-modal {
+  border-left: 3px solid var(--violet);
+  padding: 22px 22px 18px;
+}
+.welcome-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+  border-bottom: 0.5px solid var(--border);
+}
+.welcome-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--violet);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.welcome-from {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--violet);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.welcome-content h3 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--text);
+  margin: 0 0 14px;
+  line-height: 1.25;
+}
+.welcome-content p {
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0 0 12px;
+}
+.welcome-content p:last-child { margin-bottom: 0; }
+.welcome-content strong { font-weight: 500; color: var(--text); }
+.welcome-content ul {
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 8px 0 14px;
+  padding-left: 22px;
+}
+.welcome-content li { margin-bottom: 6px; }
+.welcome-content .sig {
+  text-align: right;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--violet);
+  margin-top: 8px;
+  font-style: italic;
+}
+.welcome-content .stat-row {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 10px 0 14px;
+}
+.welcome-content .stat-row li {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 6px;
+}
+.welcome-content .stat-row ul { padding-left: 0; margin: 0; }
+.welcome-content .group-label {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 14px 0 6px;
+  font-weight: 500;
+}
+.welcome-content .group-label.danger { color: var(--danger); }
+.welcome-content .group-label.safe { color: var(--emerald-text); }
+
+.welcome-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 14px;
+}
+.welcome-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.2s ease;
+}
+.welcome-dot.done { background: var(--violet); opacity: 0.5; }
+.welcome-dot.active {
+  background: var(--violet);
+  width: 22px;
+  border-radius: 4px;
+}
+
+.welcome-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 0.5px solid var(--border);
+}
+.welcome-actions .nav-btn { flex: 1; min-width: 0; }
+.btn-violet { background: var(--violet); color: #fff; }
+.btn-violet:hover { filter: brightness(0.95); }
+
+/* ========================================================
+   Final Submit Modal
+   ======================================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.22s ease, visibility 0.22s ease;
+}
+.modal-backdrop.visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.modal {
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 22px 20px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.96);
+  transition: transform 0.22s ease;
+}
+.modal-backdrop.visible .modal { transform: scale(1); }
+.modal-title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--emerald-text);
+  margin: 0 0 6px;
+}
+.modal-sub {
+  color: var(--text);
+  font-size: 14px;
+  margin: 0 0 18px;
+  line-height: 1.55;
+}
+.modal-step {
+  background: var(--surface);
+  border: 0.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.modal-step .step-num {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  color: var(--cobalt-text);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.modal-step h4 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 15px;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+.modal-step p,
+.modal-step ol,
+.modal-step ul {
+  font-size: 13.5px;
+  color: var(--text);
+  margin: 6px 0;
+  line-height: 1.55;
+}
+.modal-step ol, .modal-step ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+.modal-step ol li, .modal-step ul li { margin-bottom: 4px; }
+.modal-step .step-action {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.modal-step .step-action .nav-btn { flex: 1 1 160px; }
+.modal-close-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 14px;
+}
+
+/* ========================================================
+   Mobile
+   ======================================================== */
+@media (max-width: 640px) {
+  .shell { padding: 18px 12px 36px; }
+  .stepper { gap: 3px; }
+  .stepper-pill { padding: 8px 2px 6px; }
+  .stepper-pill .lbl { display: none; }
+  .section-title { font-size: 21px; }
+  .section-intro { font-size: 14px; padding: 12px 14px; }
+  .q-card { padding: 16px 14px; }
+  .q-title { font-size: 16px; }
+  .q-prompt { font-size: 13.5px; }
+  .nav-btn { padding: 11px 14px; font-size: 13px; flex: 1; min-width: 0; }
+  .btn-secondary { padding: 9.5px 12.5px; }
+  .btn-ghost { padding: 10.5px 12.5px; }
+  .autosave { order: 10; flex-basis: 100%; justify-content: center; margin-top: 4px; }
+  .action-row .nav-btn { flex: 1 1 140px; }
+  .brand-title { font-size: 19px; }
+  .topbar-actions .icon-btn { font-size: 11px; padding: 7px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================== PIN Gate ================== -->
+<div id="pinGate">
+  <div class="pin-card" id="pinCard">
+    <div class="pin-logo">MBLW Designs · Pantry Tracker</div>
+    <h1 class="pin-title">Linda's Round 2 Kitchen Survey</h1>
+    <p class="pin-sub">Enter your 8-digit access code to begin.</p>
+    <div class="pin-inputs" id="pinInputs">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 1">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 2">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 3">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 4">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 5">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 6">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 7">
+      <input class="pin-digit" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" autocomplete="off" aria-label="Digit 8">
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="pin-footer">If you don't have the code, check your message from Matthew.</div>
+  </div>
+</div>
+
+<div class="shell" id="shell" style="display:none">
+
+  <!-- ========== Topbar ========== -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-eyebrow">MBLW Designs · Pantry Tracker</div>
+      <h1 class="brand-title">Linda's Round 2 Kitchen Survey</h1>
+      <div class="brand-ver">v1.2.1</div>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="saveBtn" title="Download your current progress as a file you can load later">💾 Save</button>
+      <button class="icon-btn" id="loadBtn" title="Load progress from a previously-saved file">📂 Load</button>
+      <button class="icon-btn" id="themeBtn" title="Toggle light/dark mode" aria-label="Toggle theme">🌙</button>
+      <input type="file" id="loadInput" accept=".json,application/json" style="display:none">
+    </div>
+  </header>
+
+  <!-- ========== Stepper ========== -->
+  <nav class="stepper" id="stepper" aria-label="Survey sections"></nav>
+
+  <!-- ========== Section content mounts here ========== -->
+  <main id="sectionMount" role="main"></main>
+
+  <!-- ========== Validation + Output panels ========== -->
+  <div id="validationMount"></div>
+  <div id="outputMount"></div>
+
+  <!-- ========== Nav row ========== -->
+  <div class="nav-row">
+    <button class="nav-btn btn-secondary" id="backBtn">← Back</button>
+    <div class="autosave" id="autosaveInd"><span class="pulse"></span><span id="autosaveText">Autosaved</span></div>
+    <button class="nav-btn btn-primary" id="forwardBtn">Next →</button>
+  </div>
+
+  <!-- ========== Footer ========== -->
+  <footer class="footer">
+    <div class="credit">Imagined by MBLW Designs — brought to life by Claude.</div>
+    <div style="margin-top: 4px;">Your answers save automatically in this browser. Use <strong>Save</strong> / <strong>Load</strong> to move progress between devices.</div>
+  </footer>
+</div>
+
+<!-- ================== Welcome Modal (Claude speaking) ================== -->
+<div class="modal-backdrop" id="welcomeModal" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle" aria-hidden="true">
+  <div class="modal welcome-modal">
+    <div class="welcome-header">
+      <div class="welcome-avatar" aria-hidden="true">C</div>
+      <div class="welcome-from">A note from Claude</div>
+    </div>
+    <div class="welcome-content" id="welcomeContent">
+      <!-- Populated by JS -->
+    </div>
+    <div class="welcome-dots" id="welcomeDots"></div>
+    <div class="welcome-actions">
+      <button class="nav-btn btn-ghost" id="welcomeBackBtn">← Back</button>
+      <button class="nav-btn btn-violet" id="welcomeNextBtn">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================== Final Submit Modal ================== -->
+<div class="modal-backdrop" id="finalModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal">
+    <h3 class="modal-title" id="modalTitle">✓ Ready to send to Matthew!</h3>
+    <p class="modal-sub">Your answers are approved. Two quick steps to get them to Matthew — should take about 30 seconds.</p>
+
+    <div class="modal-step">
+      <div class="step-num">Step 1</div>
+      <h4>Download your responses</h4>
+      <p>Tap the button below. A file named <strong>linda-round-2-responses-[date].md</strong> will save to your device.</p>
+      <div class="step-action">
+        <button class="nav-btn btn-primary" id="modalDownloadBtn">⬇ Download .md</button>
+      </div>
+    </div>
+
+    <div class="modal-step">
+      <div class="step-num">Step 2</div>
+      <h4>Send it to Matthew via iMessage</h4>
+      <ol>
+        <li>Open <strong>Messages</strong> and find your thread with <strong>Matthew</strong></li>
+        <li>Tap the <strong>+</strong> (plus) icon to the left of the text field</li>
+        <li>Choose <strong>Files</strong> (on iPhone/iPad) or drag the file in (on Mac)</li>
+        <li>Pick the <strong>.md</strong> file you just downloaded</li>
+        <li>Hit send 📨</li>
+      </ol>
+    </div>
+
+    <div class="modal-step">
+      <div class="step-num">Alternative</div>
+      <h4>Or just copy &amp; paste</h4>
+      <p>If attaching the file is a hassle, copy everything and paste it straight into your iMessage to Matthew.</p>
+      <div class="step-action">
+        <button class="nav-btn btn-secondary" id="modalCopyBtn">📋 Copy to Clipboard</button>
+      </div>
+    </div>
+
+    <div class="modal-close-row">
+      <button class="nav-btn btn-ghost" id="modalCloseBtn">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =========================================================
+   SURVEY DATA — 7 sections, 45 questions
+   ========================================================= */
+const SURVEY = {
+  title: "Linda's Round 2 Kitchen Survey",
+  version: "v1.2.1",
+  storageKey: "mblw-linda-r2-v1",
+  sections: [
+    {
+      id: 1,
+      title: "Clarifying Round 1",
+      shortLabel: "Clarifying",
+      intro: `Mrs. Lemos — thanks for filling out Round 1. You gave us incredible material to work with. A few things I want to double-check before we go further, and a few spots where I want to hear more from you in your own words. No wrong answers. Skip anything that doesn't apply. Don't overthink it.`,
+      questions: [
+        { id: 'q1',  n: 1,  type: 'longtext', title: 'Cats.',
+          prompt: `In Round 1, under "Who lives in the house?" you selected "Other adults" but not "Pets." Almond and Oreo beg to differ. Was that intentional (you don't consider them part of the food-management question) or an oversight? Would it be useful to track their food, treats, or litter in this app too — or is that a separate universe entirely?` },
+        { id: 'q2',  n: 2,  type: 'longtext', title: 'The "shared app" you mentioned.',
+          prompt: `Round 1 question 16 asked how you make your grocery list, and you said "Shared app." But Round 1 question 18 asked which apps you've actually used, and only Paprika was checked. Which shared app are you actually using for the list? Apple Reminders? Apple Notes? Something on the fridge with magnets we don't know about?` },
+        { id: 'q3',  n: 3,  type: 'longtext', title: 'The magic wand statement, revisited.',
+          prompt: `In Round 1 you wrote: "Real time pantry inventory with minimal effort." Now that you've had a few weeks to sit with that — is that still the answer? Or has your real wish shifted toward something else (less stress about Chuck using things up, less duplicate buying, less time thinking about what's for dinner, something completely different)?` },
+        { id: 'q4',  n: 4,  type: 'longtext', title: 'The all-caps frustration.',
+          prompt: `Round 1: "PEOPLE USING THINGS UP AND NOT TELLING ME." For the record, that's now the official mission statement of this entire app. Tell me the last specific time this happened. Who was the culprit? What was the item? What did it ruin or complicate?` },
+        { id: 'q5',  n: 5,  type: 'longtext', title: `"I'd forget after a week."`,
+          prompt: `Round 1 asked how much time you'd realistically spend keeping an app updated, and you said you'd forget after a week. Totally fair. But push on that a little for me: if an app were so easy that you *didn't* have to remember to open it — it just quietly worked in the background — how would your answer change? Or would you still forget it exists?` },
+        { id: 'q6',  n: 6,  type: 'longtext', title: 'The 3-star "Worth trying" rating.',
+          prompt: `You rated likelihood-to-try a 3 out of 5. Not a hyped-up 5, not a skeptical 1. What's the part of you that said "worth trying" talking about, and what's the part that pulled you back from 4 or 5?` }
+      ]
+    },
+    {
+      id: 2,
+      title: "The Real Problem",
+      shortLabel: "The Problem",
+      intro: `This section digs into the "people using things up" problem. I want to understand it from a lot of angles before we try to solve it — because the wrong solution here makes it worse, not better.`,
+      questions: [
+        { id: 'q7',  n: 7,  type: 'radio', title: 'Frequency.',
+          prompt: `How often does "someone used it up and didn't tell me" actually happen in your kitchen? Once a week? Once a day? A few times a month? Don't estimate to be polite — give me the real number.`,
+          options: [
+            { val: 'Almost daily', label: 'Almost daily' },
+            { val: 'Multiple times a week', label: 'Multiple times a week' },
+            { val: 'About once a week', label: 'About once a week' },
+            { val: 'Few times a month', label: 'Few times a month' },
+            { val: 'Rarely', label: 'Rarely' }
+          ] },
+        { id: 'q8',  n: 8,  type: 'longtext', title: 'The item pattern.',
+          prompt: `Are there specific items this happens with the most? (Milk, bread, eggs, half-and-half, a specific condiment, etc.) If you had to bet on the next time it happens, what would the item be?` },
+        { id: 'q9',  n: 9,  type: 'longtext', title: 'The offender pattern.',
+          prompt: `Same question but about people. Is one person the repeat offender, or is it spread around? Be honest. "Dad is reading this over your shoulder" is not a valid excuse.` },
+        { id: 'q10', n: 10, type: 'longtext', title: 'When you find out.',
+          prompt: `How do you usually find out someone used the last of something? (Reach for it yourself and discover it's gone, see the empty container in the trash, they mention it in passing, you notice during grocery planning, etc.) Tell me about the *moment of discovery*.` },
+        { id: 'q11', n: 11, type: 'longtext', title: 'What you do when it happens.',
+          prompt: `In the moment — when you realize the thing you needed is gone — what's your actual reaction? (Emotionally AND practically.) Do you just substitute like you mentioned in Round 1, or is there more to it than that?` },
+        { id: 'q12', n: 12, type: 'longtext', title: 'The ideal social signal.',
+          prompt: `If there were a perfect way for family members to tell you "I just used the last of the milk" — without nagging, without alerting half the neighborhood — what would that look like? A text? A voice announcement from a HomePod? A silent widget update on your phone? An entry in a shared list? A polite email from the app? Describe your ideal.` },
+        { id: 'q13', n: 13, type: 'combo', title: 'The revenge question.',
+          prompt: `Be honest — when someone uses something up without telling you, do you want:`,
+          options: [
+            { val: 'A', label: 'To know who did it', sub: 'so you can give them a hard time' },
+            { val: 'B', label: 'To prevent it from happening', sub: 'like reserved items or locks' },
+            { val: 'C', label: 'To have it automatically replaced', sub: 'the fridge just magically restocks' },
+            { val: 'D', label: 'Some combination — describe below' }
+          ],
+          textLabel: `If you picked "D" or want to explain your pick — tell me more:` }
+      ]
+    },
+    {
+      id: 3,
+      title: "Your Kitchen, Specifically",
+      shortLabel: "Kitchen",
+      intro: `Now the practical stuff. I need a read on the actual physical kitchen so we're not building an app for a kitchen that doesn't exist.`,
+      questions: [
+        { id: 'q14', n: 14, type: 'radio', title: 'Estimated item count.',
+          prompt: `Rough guess — how many distinct food items are in your kitchen right now? Not counting individual cans of the same soup as separate — "2 cans of chicken noodle" counts as 1 item.`,
+          options: [
+            { val: 'Under 50',   label: 'Under 50',   sub: 'small, minimal household' },
+            { val: '50–100',     label: '50–100',     sub: 'average household' },
+            { val: '100–200',    label: '100–200',    sub: 'well-stocked' },
+            { val: '200–300',    label: '200–300',    sub: 'thorough cook with a full pantry' },
+            { val: '300+',       label: '300+',       sub: 'you run a small restaurant' }
+          ] },
+        { id: 'q15', n: 15, type: 'longtext', title: 'Zones.',
+          prompt: `List every physical place in your house where food lives. Fridge. Freezer. Main pantry. Spice rack. Garage fridge? Spare freezer? The shelf above the microwave? Everything counts. I want a complete tour.` },
+        { id: 'q16', n: 16, type: 'longtext', title: 'The unlabeled decanted-container question.',
+          prompt: `Do you have those OXO-style flour/sugar/rice jars where the original packaging is gone? Any spice jars you refill from bulk? How many of those are there, and do they cause you any tracking trouble specifically?` },
+        { id: 'q17', n: 17, type: 'longtext', title: 'The physical flow of groceries home from the store.',
+          prompt: `Walk me through what happens the moment you get home from the grocery store. Where do bags land? What gets put away first? Who helps (or doesn't)? How long does the whole process take?` },
+        { id: 'q18', n: 18, type: 'longtext', title: 'The leftover container situation.',
+          prompt: `When you save leftovers, what container do they go in? How do you (or don't you) label them? How often does a mystery container get thrown out because you couldn't identify it or weren't sure if it was still good?` },
+        { id: 'q19', n: 19, type: 'longtext', title: 'The printer question.',
+          prompt: `You mentioned in Round 1 that you use loyalty cards and a shared app, and that you print your grocery list on paper. Walk me through that — what printer do you use, where does the list come from, and does that whole process work well for you or is it clunky?` }
+      ]
+    },
+    {
+      id: 4,
+      title: "How You Actually Capture",
+      shortLabel: "Capture",
+      intro: `Round 1 asked what methods you'd use in theory. This section asks what you actually do right now. The Mom Test rule applies: I'm asking about your real life, not my app ideas.`,
+      questions: [
+        { id: 'q20', n: 20, type: 'longtext', title: 'Current tracking method — be specific.',
+          prompt: `You said "I don't track" in Round 1. But that can't be fully true — you clearly know what's in your kitchen most of the time. So what's the actual system? Mental memory? Checking before shopping? Asking Chuck? Peek-and-hope? Describe the real method, even if it's chaotic.` },
+        { id: 'q21', n: 21, type: 'longtext', title: 'Siri usage, honestly.',
+          prompt: `You rated voice experience as "Sometimes." Be specific — what do you actually use Siri for today? Timers? Reminders? HomePod music? Never really use it? What's kept you from using it more?` },
+        { id: 'q22', n: 22, type: 'longtext', title: 'HomePod placements.',
+          prompt: `You have 2 original HomePods and 2 HomePod minis. Which is in which room? Which one do you actually talk to the most?` },
+        { id: 'q23', n: 23, type: 'longtext', title: 'The barcode moment.',
+          prompt: `You said "Yes, a few times" in Round 1 to barcode scanning. What's the last thing you scanned? Was it annoying? Did it work? Would you do it again?` },
+        { id: 'q24', n: 24, type: 'longtext', title: 'The last time you forgot something at the store.',
+          prompt: `Tell me about the last time you were at the grocery store and realized you'd forgotten to write something down on your list, or were unsure if you needed something. What happened? Did you buy it anyway? Skip it? Call someone?` },
+        { id: 'q25', n: 25, type: 'radio', title: 'Setup-time tolerance — hard number.',
+          prompt: `Real honest answer: if an app were genuinely useful to you, how much one-time upfront setup time would you actually accept? (Entering your pantry, adding family members, configuring a few things.) Don't give me the nice answer — give me the real one.`,
+          options: [
+            { val: '0 minutes',     label: '0 minutes',     sub: `I'm out if it doesn't just work` },
+            { val: '5 minutes max', label: '5 minutes max' },
+            { val: '15 minutes is fine', label: '15 minutes is fine' },
+            { val: '30 minutes if it\'s worth it', label: `30 minutes if it's worth it` },
+            { val: '1+ hour if Matthew is doing it for me', label: '1+ hour if Matthew is doing it for me' },
+            { val: `I don't know until I try`, label: `I don't know until I try` }
+          ] },
+        { id: 'q26', n: 26, type: 'radio', title: 'Who would do the setup?',
+          prompt: `Whoever answers question 25, answer this: would YOU do the setup, or would Matthew do it while you watch? Both are valid answers. This isn't a trap.`,
+          options: [
+            { val: 'Me', label: 'Me' },
+            { val: 'Matthew', label: 'Matthew' },
+            { val: 'A mix', label: 'A mix' },
+            { val: 'Not sure', label: 'Not sure' }
+          ] }
+      ]
+    },
+    {
+      id: 5,
+      title: "The Family Question",
+      shortLabel: "Family",
+      intro: `Here's the part that might feel awkward. I need an honest read on family adoption because the research tells us it's the make-or-break factor. You're not betraying anyone by answering truthfully — you're giving us a chance to design something that actually fits how your family really works. Dad's not reading this. Promise.`,
+      questions: [
+        { id: 'q27', n: 27, type: 'radio', title: 'Dad (Chuck) — realistic adoption.',
+          prompt: `If this app existed on Dad's iPhone today and I asked him to install it, what's the actual likelihood he'd use it regularly? Not occasionally — regularly.`,
+          options: [
+            { val: `He'd use it daily`, label: `He'd use it daily` },
+            { val: `He'd use it if I reminded him weekly`, label: `He'd use it if I reminded him weekly` },
+            { val: `He'd use it maybe once a month`, label: `He'd use it maybe once a month` },
+            { val: `He'd install it to be nice and forget it exists`, label: `He'd install it to be nice and forget it exists` },
+            { val: `He wouldn't install it at all`, label: `He wouldn't install it at all` },
+            { val: 'I genuinely have no idea', label: 'I genuinely have no idea' }
+          ] },
+        { id: 'q28', n: 28, type: 'longtext', title: 'Dad — the friction points.',
+          prompt: `What specifically would keep Dad from using an app like this? Is it general tech resistance? Is it a specific thing (having to log in, another notification, another thing to check, etc.)? What's the realistic blocker?` },
+        { id: 'q29', n: 29, type: 'longtext', title: 'Dad — the bribery question.',
+          prompt: `Is there anything the app could do that would make Dad want to use it on his own — not because you asked, not because he feels obligated, but because he'd genuinely find it useful? Reporting that "we're out of his favorite cereal"? Helping him win the occasional what-should-we-eat debate? Making his HomePod do something cool?` },
+        { id: 'q30', n: 30, type: 'longtext', title: 'Carole in Pittsburgh.',
+          prompt: `Matthew's plan includes making this work between your house and Carole's eventually. Honest read — how much do you actually coordinate food/grocery stuff with Carole today? Is that a thing you wish was easier, or is it genuinely not a problem?` },
+        { id: 'q31', n: 31, type: 'longtext', title: 'Matthew.',
+          prompt: `Matthew's building this for you, but he also lives there and uses the kitchen. Be honest — is Matthew part of the "people using things up and not telling me" problem? Or is he the one you can rely on?` },
+        { id: 'q32', n: 32, type: 'longtext', title: 'Yang (Carole\'s husband).',
+          prompt: `Yang is on Android, not iPhone. If we got to the point where this app was working for our family and Carole's family, would it bother you if Yang couldn't participate because of his phone? Or is that genuinely not your problem to solve?` }
+      ]
+    },
+    {
+      id: 6,
+      title: "Paprika + Recipes",
+      shortLabel: "Paprika",
+      intro: `Paprika got a 4.5/5 priority score from Matthew, which made the whole development team panic briefly. I need the real story from you on this one.`,
+      questions: [
+        { id: 'q33', n: 33, type: 'longtext', title: 'Paprika — current usage.',
+          prompt: `Walk me through how you actually use Paprika. Do you look at recipes daily? Weekly? Only for new recipes? Is it your reference book, or more like something you opened once and now just sits there?` },
+        { id: 'q34', n: 34, type: 'radio', title: 'Paprika — recipe count estimate.',
+          prompt: `Roughly how many recipes are in your Paprika right now? 20? 100? 500? "No idea, but a lot"?`,
+          options: [
+            { val: 'Under 50',  label: 'Under 50' },
+            { val: '50–100',    label: '50–100' },
+            { val: '100–200',   label: '100–200' },
+            { val: '200–500',   label: '200–500' },
+            { val: '500+',      label: '500+' },
+            { val: 'No idea',   label: 'No idea' }
+          ] },
+        { id: 'q35', n: 35, type: 'radio', title: 'The replacement question — a real one.',
+          prompt: `If Matthew built a pantry app that *also* handled recipes — not as well as Paprika, but well enough — would you prefer to consolidate everything into one app, or keep Paprika as its own thing and just have the pantry app know about it?`,
+          options: [
+            { val: 'Consolidate', label: 'Consolidate everything into one app' },
+            { val: 'Keep them separate', label: 'Keep Paprika separate; pantry app just talks to it' },
+            { val: 'Depends on how well the new app handles recipes', label: 'Depends on how well the new app handles recipes' },
+            { val: `I don't care, whatever Matthew thinks is best`, label: `I don't care, whatever Matthew thinks is best` }
+          ] },
+        { id: 'q36', n: 36, type: 'longtext', title: 'The sacrifice question.',
+          prompt: `If consolidating meant you had to re-import all your Paprika recipes into a new app one time (probably about 2 minutes of your time, with 97% of the data coming across cleanly), would you do it? Or is that a dealbreaker?` },
+        { id: 'q37', n: 37, type: 'longtext', title: 'Grocery list auto-generation.',
+          prompt: `When you cook a recipe, would you want the app to automatically add the ingredients you used to a "running low" list? Or is that the kind of thing you'd rather handle yourself so the app doesn't get in your way?` }
+      ]
+    },
+    {
+      id: 7,
+      title: "Honesty Round",
+      shortLabel: "Honesty",
+      intro: `Last section. These are the questions where I specifically need you to be brutal, because the research keeps flagging that polite answers here waste everyone's time later. Take your time on these.`,
+      questions: [
+        { id: 'q38', n: 38, type: 'radio', title: `The "would you actually use this" question — no hype.`,
+          prompt: `Be completely honest: right now, today, if this app existed exactly as we've described it — pantry tracking, voice capture via HomePod, Paprika import, grocery list on your Reminders, shared with family, zero dollars per month — would you actually use it after the first 30 days? Or would it become another thing you tried once?`,
+          options: [
+            { val: `I'd use it daily`, label: `I'd use it daily` },
+            { val: `I'd use it a few times a week`, label: `I'd use it a few times a week` },
+            { val: `I'd use it when it occurred to me`, label: `I'd use it when it occurred to me` },
+            { val: `I'd try it for a few weeks then drift off`, label: `I'd try it for a few weeks then drift off` },
+            { val: `I'd probably never really use it`, label: `I'd probably never really use it` },
+            { val: `I can't honestly predict`, label: `I can't honestly predict` }
+          ] },
+        { id: 'q39', n: 39, type: 'longtext', title: 'The dealbreaker list.',
+          prompt: `If the app existed and you were trying it for the first time, what's the one thing that would cause you to quit and never open it again? (Slow? Confusing? Too many notifications? Family won't use it? Something else?) Give me the actual trigger that would uninstall this for you.` },
+        { id: 'q40', n: 40, type: 'longtext', title: 'The killer feature.',
+          prompt: `Conversely — what's the *one* thing this app could do that would make you tell other people about it? Not a list of ten features, not the whole package — the single specific capability that would make you go "okay, this is genuinely useful and not just another app Matthew built."` },
+        { id: 'q41', n: 41, type: 'longtext', title: 'The Chuck-specific question.',
+          prompt: `Research is telling us that the app succeeds or fails based on whether Dad uses it. You know him better than anyone. What's the one thing the app absolutely cannot ask him to do, and what's the one thing he might actually enjoy about it?` },
+        { id: 'q42', n: 42, type: 'longtext', title: 'Your veto.',
+          prompt: `Matthew has made it clear you have veto power over this whole project. If you finished this survey and your gut says "honestly, I don't think this is going to help me" — would you tell him? Or would you let him build it anyway because he's enjoying the project? There's no wrong answer; I'm just trying to understand the dynamic.` },
+        { id: 'q43', n: 43, type: 'radio', title: 'Beta-test willingness.',
+          prompt: `If Matthew asks you to test an early version for 30 days and give him feedback along the way — would you do it genuinely? Or do you have the kind of mom-energy where everything Matthew builds gets a "it's great, honey" regardless of whether it actually is?`,
+          options: [
+            { val: `I'd give real feedback`, label: `I'd give real feedback` },
+            { val: `I'd try to but might soften things`, label: `I'd try to but might soften things` },
+            { val: `I'd mostly just say it's great`, label: `I'd mostly just say it's great` },
+            { val: `Matthew knows I'll tell him the truth`, label: `Matthew knows I'll tell him the truth` }
+          ] },
+        { id: 'q44', n: 44, type: 'radio', title: 'Expiration alerts — opt-in decision.',
+          prompt: `The app will have an option to notify you when food is about to expire. It'll be off by default, and you can turn it on per person in your family. Would you turn it on for yourself, turn it on for Dad, turn it on for both, or leave it off entirely?`,
+          options: [
+            { val: 'On for me',    label: 'On for me' },
+            { val: 'On for Dad',   label: 'On for Dad' },
+            { val: 'On for both',  label: 'On for both' },
+            { val: 'Off entirely', label: 'Off entirely' },
+            { val: 'Not sure yet', label: 'Not sure yet' }
+          ] },
+        { id: 'q45', n: 45, type: 'longtext', title: `Anything we haven't asked.`,
+          prompt: `Last question. What's the thing about managing food in your household that these two surveys haven't asked about — but absolutely should have? Or is there something you want Matthew to hear before he starts building this thing?` }
+      ]
+    }
+  ]
+};
+
+/* Build a flat index of all questions with their section id */
+const ALL_QS = [];
+SURVEY.sections.forEach(s => {
+  s.questions.forEach(q => ALL_QS.push({ sectionId: s.id, ...q }));
+});
+
+/* =========================================================
+   STATE
+   ========================================================= */
+const state = {
+  currentSection: 0,          // 0-based index into SURVEY.sections
+  answers: {},                // { q1: 'text', q13: { choices: ['A','B'], text: '...' }, ... }
+  visited: {},                // { 1: true, 2: true } — 1-indexed section ids visited
+  submitted: false
+};
+
+/* =========================================================
+   STORAGE (autosave + manual save/load)
+   ========================================================= */
+function saveLocal() {
+  try {
+    const payload = {
+      v: SURVEY.version,
+      ts: new Date().toISOString(),
+      answers: state.answers,
+      visited: state.visited,
+      currentSection: state.currentSection
+    };
+    localStorage.setItem(SURVEY.storageKey, JSON.stringify(payload));
+    flashAutosave();
+  } catch (e) {
+    console.warn('localStorage unavailable', e);
+  }
+}
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(SURVEY.storageKey);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    if (parsed.answers) state.answers = parsed.answers;
+    if (parsed.visited) state.visited = parsed.visited;
+    if (typeof parsed.currentSection === 'number') state.currentSection = parsed.currentSection;
+  } catch (e) {
+    console.warn('Failed to load from localStorage', e);
+  }
+}
+
+function flashAutosave() {
+  const ind = document.getElementById('autosaveInd');
+  const txt = document.getElementById('autosaveText');
+  if (!ind) return;
+  ind.classList.add('saving');
+  txt.textContent = 'Saving…';
+  clearTimeout(flashAutosave._t);
+  flashAutosave._t = setTimeout(() => {
+    ind.classList.remove('saving');
+    txt.textContent = 'Autosaved';
+  }, 450);
+}
+
+/* =========================================================
+   RENDERERS
+   ========================================================= */
+function renderStepper() {
+  const mount = document.getElementById('stepper');
+  mount.innerHTML = '';
+  SURVEY.sections.forEach((s, i) => {
+    const status = sectionStatus(s.id);
+    const pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = 'stepper-pill';
+    if (i === state.currentSection) pill.classList.add('is-current');
+    if (status === 'complete') pill.classList.add('status-complete');
+    else if (status === 'incomplete') pill.classList.add('status-incomplete');
+    pill.setAttribute('aria-label', `Section ${s.id}: ${s.title} — ${status}`);
+    pill.innerHTML = `
+      <span class="num">${s.id}</span>
+      <span class="lbl">${s.shortLabel}</span>
+      <span class="dot" aria-hidden="true"></span>
+    `;
+    pill.addEventListener('click', () => goToSection(i));
+    mount.appendChild(pill);
+  });
+}
+
+function renderCurrentSection() {
+  const section = SURVEY.sections[state.currentSection];
+  const mount = document.getElementById('sectionMount');
+  mount.innerHTML = '';
+
+  const head = document.createElement('div');
+  head.className = 'section-head';
+  head.innerHTML = `
+    <div class="section-eyebrow">Section ${section.id} of ${SURVEY.sections.length}</div>
+    <h2 class="section-title">${escapeHtml(section.title)}</h2>
+    <div class="section-sub">${section.questions.length} question${section.questions.length === 1 ? '' : 's'} in this section</div>
+  `;
+  mount.appendChild(head);
+
+  const intro = document.createElement('div');
+  intro.className = 'section-intro';
+  intro.textContent = section.intro;
+  mount.appendChild(intro);
+
+  section.questions.forEach(q => mount.appendChild(renderQuestion(q)));
+
+  // Mark visited
+  state.visited[section.id] = true;
+  saveLocal();
+
+  // Update nav buttons
+  renderNav();
+  // Clear panels when moving
+  document.getElementById('validationMount').innerHTML = '';
+  document.getElementById('outputMount').innerHTML = '';
+  state.submitted = false;
+
+  // Scroll to top of section
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderQuestion(q) {
+  const card = document.createElement('div');
+  card.className = 'q-card';
+  card.id = 'card-' + q.id;
+
+  const header = document.createElement('div');
+  header.innerHTML = `
+    <div class="q-num">Question ${q.n}</div>
+    <div class="q-title">${escapeHtml(q.title)}</div>
+    <div class="q-prompt">${escapeHtml(q.prompt)}</div>
+  `;
+  card.appendChild(header);
+
+  if (q.type === 'longtext') {
+    card.appendChild(buildTextarea(q));
+  } else if (q.type === 'radio') {
+    card.appendChild(buildRadioGroup(q));
+  } else if (q.type === 'combo') {
+    card.appendChild(buildComboGroup(q));
+  }
+
+  return card;
+}
+
+function buildTextarea(q) {
+  const ta = document.createElement('textarea');
+  ta.id = 'input-' + q.id;
+  ta.name = q.id;
+  ta.placeholder = 'Type your answer here…';
+  ta.value = state.answers[q.id] || '';
+  ta.addEventListener('input', () => {
+    state.answers[q.id] = ta.value;
+    saveLocal();
+    renderStepper();
+  });
+  return ta;
+}
+
+function buildRadioGroup(q) {
+  const group = document.createElement('div');
+  group.className = 'opt-group';
+  group.setAttribute('role', 'radiogroup');
+
+  q.options.forEach((opt, idx) => {
+    const id = `input-${q.id}-${idx}`;
+    const wrap = document.createElement('label');
+    wrap.className = 'opt';
+    wrap.htmlFor = id;
+    if (state.answers[q.id] === opt.val) wrap.classList.add('checked');
+
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = q.id;
+    radio.id = id;
+    radio.value = opt.val;
+    if (state.answers[q.id] === opt.val) radio.checked = true;
+    radio.addEventListener('change', () => {
+      state.answers[q.id] = opt.val;
+      // Toggle .checked class on siblings
+      group.querySelectorAll('.opt').forEach(el => el.classList.remove('checked'));
+      wrap.classList.add('checked');
+      saveLocal();
+      renderStepper();
+    });
+
+    const main = document.createElement('span');
+    main.className = 'opt-main';
+    main.innerHTML = `<div class="lbl">${escapeHtml(opt.label)}</div>${opt.sub ? `<div class="sub">${escapeHtml(opt.sub)}</div>` : ''}`;
+
+    wrap.appendChild(radio);
+    wrap.appendChild(main);
+    group.appendChild(wrap);
+  });
+
+  return group;
+}
+
+function buildComboGroup(q) {
+  // Multi-select checkboxes + companion long text
+  const container = document.createElement('div');
+
+  const group = document.createElement('div');
+  group.className = 'opt-group';
+
+  // Ensure state shape
+  if (!state.answers[q.id] || typeof state.answers[q.id] !== 'object') {
+    state.answers[q.id] = { choices: [], text: '' };
+  }
+  const current = state.answers[q.id];
+
+  q.options.forEach((opt, idx) => {
+    const id = `input-${q.id}-${idx}`;
+    const wrap = document.createElement('label');
+    wrap.className = 'opt';
+    wrap.htmlFor = id;
+    const isChecked = Array.isArray(current.choices) && current.choices.includes(opt.val);
+    if (isChecked) wrap.classList.add('checked');
+
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.name = q.id + '[]';
+    cb.id = id;
+    cb.value = opt.val;
+    cb.checked = isChecked;
+    cb.addEventListener('change', () => {
+      if (cb.checked) {
+        if (!current.choices.includes(opt.val)) current.choices.push(opt.val);
+        wrap.classList.add('checked');
+      } else {
+        current.choices = current.choices.filter(c => c !== opt.val);
+        wrap.classList.remove('checked');
+      }
+      saveLocal();
+      renderStepper();
+    });
+
+    const main = document.createElement('span');
+    main.className = 'opt-main';
+    main.innerHTML = `<div class="lbl">${escapeHtml(opt.label)}</div>${opt.sub ? `<div class="sub">${escapeHtml(opt.sub)}</div>` : ''}`;
+
+    wrap.appendChild(cb);
+    wrap.appendChild(main);
+    group.appendChild(wrap);
+  });
+
+  container.appendChild(group);
+
+  if (q.textLabel) {
+    const caption = document.createElement('div');
+    caption.className = 'combo-caption';
+    caption.textContent = q.textLabel;
+    container.appendChild(caption);
+  }
+
+  const ta = document.createElement('textarea');
+  ta.id = 'input-' + q.id + '-text';
+  ta.placeholder = 'Describe…';
+  ta.value = current.text || '';
+  ta.addEventListener('input', () => {
+    current.text = ta.value;
+    saveLocal();
+    renderStepper();
+  });
+  container.appendChild(ta);
+
+  return container;
+}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+function renderNav() {
+  const back = document.getElementById('backBtn');
+  const fwd = document.getElementById('forwardBtn');
+  const isFirst = state.currentSection === 0;
+  const isLast = state.currentSection === SURVEY.sections.length - 1;
+
+  back.disabled = isFirst;
+  back.classList.toggle('hidden', isFirst);
+
+  if (isLast) {
+    fwd.textContent = '✓ Review & Submit';
+    fwd.classList.remove('btn-primary');
+    fwd.classList.add('btn-success');
+  } else {
+    fwd.textContent = 'Next →';
+    fwd.classList.remove('btn-success');
+    fwd.classList.add('btn-primary');
+  }
+}
+
+function goToSection(idx) {
+  if (idx < 0 || idx >= SURVEY.sections.length) return;
+  state.currentSection = idx;
+  saveLocal();
+  renderCurrentSection();
+  renderStepper();
+}
+
+document.getElementById('backBtn').addEventListener('click', () => {
+  if (state.currentSection > 0) goToSection(state.currentSection - 1);
+});
+document.getElementById('forwardBtn').addEventListener('click', () => {
+  const isLast = state.currentSection === SURVEY.sections.length - 1;
+  if (isLast) attemptSubmit();
+  else goToSection(state.currentSection + 1);
+});
+
+/* =========================================================
+   STATUS / VALIDATION
+   ========================================================= */
+function isAnswered(q) {
+  const a = state.answers[q.id];
+  if (q.type === 'longtext') return typeof a === 'string' && a.trim().length > 0;
+  if (q.type === 'radio')   return typeof a === 'string' && a.length > 0;
+  if (q.type === 'combo') {
+    if (!a || typeof a !== 'object') return false;
+    const hasChoice = Array.isArray(a.choices) && a.choices.length > 0;
+    const hasText = typeof a.text === 'string' && a.text.trim().length > 0;
+    return hasChoice || hasText;
+  }
+  return false;
+}
+
+function sectionStatus(sectionId) {
+  const section = SURVEY.sections.find(s => s.id === sectionId);
+  if (!section) return 'none';
+  const allAnswered = section.questions.every(isAnswered);
+  if (allAnswered) return 'complete';
+  const visited = !!state.visited[sectionId];
+  if (visited) return 'incomplete';
+  return 'none';
+}
+
+function collectMissing() {
+  const missing = [];
+  SURVEY.sections.forEach(s => {
+    s.questions.forEach(q => {
+      if (!isAnswered(q)) missing.push({ sectionId: s.id, sectionTitle: s.title, q });
+    });
+  });
+  return missing;
+}
+
+function attemptSubmit() {
+  state.submitted = true;
+  const missing = collectMissing();
+  const validationMount = document.getElementById('validationMount');
+  const outputMount = document.getElementById('outputMount');
+
+  if (missing.length > 0) {
+    outputMount.innerHTML = '';
+    // Group by section
+    const bySection = {};
+    missing.forEach(m => {
+      if (!bySection[m.sectionId]) bySection[m.sectionId] = { title: m.sectionTitle, qs: [] };
+      bySection[m.sectionId].qs.push(m.q);
+    });
+
+    let html = `
+      <div class="validation-panel" id="validationPanel">
+        <h3>⚠ ${missing.length} question${missing.length === 1 ? '' : 's'} still unanswered</h3>
+        <p>Every question needs an answer to submit. Click a section below to jump back and fill in the blanks. All your progress is saved.</p>
+        <ul>
+    `;
+    Object.keys(bySection).forEach(sid => {
+      const sec = bySection[sid];
+      const idx = SURVEY.sections.findIndex(s => s.id === +sid);
+      const qnums = sec.qs.map(q => `Q${q.n}`).join(', ');
+      html += `<li><a data-goto="${idx}">Section ${sid} — ${escapeHtml(sec.title)}</a> (${qnums})</li>`;
+    });
+    html += `</ul></div>`;
+    validationMount.innerHTML = html;
+
+    // Wire jump links
+    validationMount.querySelectorAll('a[data-goto]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const idx = +a.dataset.goto;
+        goToSection(idx);
+        // After render, flash the first missing q in that section
+        setTimeout(() => {
+          const section = SURVEY.sections[idx];
+          const firstMiss = section.questions.find(q => !isAnswered(q));
+          if (firstMiss) {
+            const card = document.getElementById('card-' + firstMiss.id);
+            if (card) {
+              card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              card.classList.remove('flash');
+              void card.offsetWidth; // reflow to restart anim
+              card.classList.add('flash');
+            }
+          }
+        }, 100);
+      });
+    });
+
+    // Scroll to validation panel
+    setTimeout(() => {
+      document.getElementById('validationPanel').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+
+    renderStepper();
+    return;
+  }
+
+  // All answered — show the review page
+  validationMount.innerHTML = '';
+  outputMount.innerHTML = '';
+  renderReviewPage();
+  renderStepper();
+}
+
+/* =========================================================
+   REVIEW PAGE + FINAL MODAL
+   ========================================================= */
+function renderReviewPage() {
+  const mount = document.getElementById('sectionMount');
+  const navRow = document.querySelector('.nav-row');
+  const stepper = document.getElementById('stepper');
+
+  // Hide the wizard nav + stepper while on review page
+  if (navRow) navRow.style.display = 'none';
+  if (stepper) stepper.style.display = 'none';
+
+  let html = `
+    <div class="review-head">
+      <div class="eyebrow">Final Review</div>
+      <h2>Look it all over, Mrs. Lemos.</h2>
+      <p>Take a scroll through every question and your answer. If anything needs fixing, tap <strong>Go Back to Edit</strong> — your progress is safe. When everything looks right, tap <strong>Approve &amp; Send</strong>.</p>
+    </div>
+  `;
+
+  SURVEY.sections.forEach(s => {
+    html += `<div class="review-section">`;
+    html += `<div class="review-section-title">Section ${s.id} — ${escapeHtml(s.title)}</div>`;
+    s.questions.forEach(q => {
+      html += `<div class="review-q">`;
+      html += `<div class="review-q-num">Question ${q.n}</div>`;
+      html += `<div class="review-q-title">${escapeHtml(q.title)}</div>`;
+      html += `<div class="review-q-prompt">${escapeHtml(q.prompt)}</div>`;
+      html += renderAnswerHtml(q);
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+
+  html += `
+    <div class="review-actions">
+      <button class="nav-btn btn-secondary" id="reviewBackBtn">← Go Back to Edit</button>
+      <button class="nav-btn btn-success" id="reviewApproveBtn">✓ Approve &amp; Send</button>
+    </div>
+  `;
+
+  mount.innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  document.getElementById('reviewBackBtn').addEventListener('click', exitReviewPage);
+  document.getElementById('reviewApproveBtn').addEventListener('click', showFinalModal);
+}
+
+function exitReviewPage() {
+  const navRow = document.querySelector('.nav-row');
+  const stepper = document.getElementById('stepper');
+  if (navRow) navRow.style.display = '';
+  if (stepper) stepper.style.display = '';
+  // Return to last section
+  state.currentSection = SURVEY.sections.length - 1;
+  renderCurrentSection();
+  renderStepper();
+}
+
+function renderAnswerHtml(q) {
+  const a = state.answers[q.id];
+  if (q.type === 'longtext') {
+    if (!a || !a.trim()) return `<div class="review-q-answer empty">(blank)</div>`;
+    return `<div class="review-q-answer">${escapeHtml(a.trim())}</div>`;
+  }
+  if (q.type === 'radio') {
+    if (!a) return `<div class="review-q-answer empty">(no selection)</div>`;
+    return `<div class="review-q-answer"><span class="review-chip">${escapeHtml(a)}</span></div>`;
+  }
+  if (q.type === 'combo') {
+    if (!a) return `<div class="review-q-answer empty">(blank)</div>`;
+    const choices = Array.isArray(a.choices) ? a.choices : [];
+    const labelMap = {};
+    q.options.forEach(o => { labelMap[o.val] = o.label; });
+    let out = '';
+    if (choices.length > 0) {
+      out += `<div class="review-combo-label">Selected</div>`;
+      out += `<div class="review-combo-choices">`;
+      choices.forEach(c => {
+        out += `<span class="review-chip">${escapeHtml(c + '. ' + (labelMap[c] || ''))}</span>`;
+      });
+      out += `</div>`;
+    }
+    out += `<div class="review-combo-label">Detail</div>`;
+    const detail = (a.text && a.text.trim()) ? a.text.trim() : '';
+    if (detail) out += `<div class="review-q-answer">${escapeHtml(detail)}</div>`;
+    else out += `<div class="review-q-answer empty">(none)</div>`;
+    return out;
+  }
+  return '';
+}
+
+function showFinalModal() {
+  const modal = document.getElementById('finalModal');
+  modal.classList.add('visible');
+  modal.setAttribute('aria-hidden', 'false');
+}
+function hideFinalModal() {
+  const modal = document.getElementById('finalModal');
+  modal.classList.remove('visible');
+  modal.setAttribute('aria-hidden', 'true');
+}
+document.getElementById('modalDownloadBtn').addEventListener('click', downloadMarkdown);
+document.getElementById('modalCopyBtn').addEventListener('click', copyMarkdown);
+document.getElementById('modalCloseBtn').addEventListener('click', hideFinalModal);
+document.getElementById('finalModal').addEventListener('click', (e) => {
+  if (e.target.id === 'finalModal') hideFinalModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('finalModal');
+    if (modal && modal.classList.contains('visible')) hideFinalModal();
+  }
+});
+
+/* =========================================================
+   OUTPUT GENERATION
+   ========================================================= */
+function generateMarkdown() {
+  const nowIso = new Date().toISOString();
+  const nowLocal = new Date().toLocaleString();
+  let md = `# ${SURVEY.title}\n`;
+  md += `\n*Generated: ${nowLocal}*  \n`;
+  md += `*Version: ${SURVEY.version}*  \n`;
+  md += `*Respondent: Linda Lemos*\n`;
+  md += `\n---\n`;
+
+  SURVEY.sections.forEach(s => {
+    md += `\n## Section ${s.id} — ${s.title}\n`;
+    s.questions.forEach(q => {
+      md += `\n### Q${q.n}. ${q.title}\n`;
+      md += `\n> ${q.prompt.replace(/\n/g, '\n> ')}\n\n`;
+      md += `**Answer:**\n\n`;
+      md += formatAnswerForMd(q);
+      md += `\n`;
+    });
+    md += `\n---\n`;
+  });
+
+  md += `\n*Imagined by MBLW Designs — brought to life by Claude.*\n`;
+  md += `*Survey completed ${nowIso}*\n`;
+  return md;
+}
+
+function formatAnswerForMd(q) {
+  const a = state.answers[q.id];
+  if (q.type === 'longtext') {
+    if (!a || !a.trim()) return '—\n';
+    return a.trim() + '\n';
+  }
+  if (q.type === 'radio') {
+    return (a ? a : '—') + '\n';
+  }
+  if (q.type === 'combo') {
+    if (!a || typeof a !== 'object') return '—\n';
+    const choices = Array.isArray(a.choices) ? a.choices : [];
+    let out = '';
+    if (choices.length > 0) {
+      const labelMap = {};
+      q.options.forEach(o => { labelMap[o.val] = o.label; });
+      const rendered = choices.map(c => `${c}. ${labelMap[c] || ''}`).join('; ');
+      out += `*Selected:* ${rendered}\n\n`;
+    } else {
+      out += `*Selected:* —\n\n`;
+    }
+    out += `*Detail:* ${a.text && a.text.trim() ? a.text.trim() : '—'}\n`;
+    return out;
+  }
+  return '—\n';
+}
+
+function copyMarkdown() {
+  const md = generateMarkdown();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(md).then(
+      () => toast('Copied to clipboard — paste it into a message to Matthew.'),
+      () => fallbackCopy(md)
+    );
+  } else {
+    fallbackCopy(md);
+  }
+}
+function fallbackCopy(text) {
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    toast('Copied to clipboard.');
+  } catch (e) {
+    toast('Copy failed — try the Download button instead.');
+  }
+}
+function downloadMarkdown() {
+  const md = generateMarkdown();
+  const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  a.href = url;
+  a.download = `linda-round-2-responses-${stamp}.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 500);
+  toast('Downloaded — check your Downloads folder.');
+}
+
+/* =========================================================
+   SAVE / LOAD (manual JSON export-import)
+   ========================================================= */
+function manualSave() {
+  const payload = {
+    v: SURVEY.version,
+    ts: new Date().toISOString(),
+    answers: state.answers,
+    visited: state.visited,
+    currentSection: state.currentSection
+  };
+  const json = JSON.stringify(payload, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const stamp = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  a.href = url;
+  a.download = `linda-round-2-progress-${stamp}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 500);
+  toast('Progress saved. You can load this file on another device anytime.');
+}
+function manualLoad(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (parsed.answers) state.answers = parsed.answers;
+      if (parsed.visited) state.visited = parsed.visited;
+      if (typeof parsed.currentSection === 'number') state.currentSection = parsed.currentSection;
+      saveLocal();
+      renderStepper();
+      renderCurrentSection();
+      toast('Progress loaded.');
+    } catch (err) {
+      toast('That file did not look like a saved-progress file.');
+    }
+  };
+  reader.readAsText(file);
+}
+document.getElementById('saveBtn').addEventListener('click', manualSave);
+document.getElementById('loadBtn').addEventListener('click', () => {
+  document.getElementById('loadInput').click();
+});
+document.getElementById('loadInput').addEventListener('change', (e) => {
+  const f = e.target.files && e.target.files[0];
+  if (f) manualLoad(f);
+  e.target.value = '';
+});
+
+/* =========================================================
+   THEME TOGGLE
+   ========================================================= */
+const THEME_KEY = SURVEY.storageKey + '-theme';
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeBtn').textContent = '☀';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    document.getElementById('themeBtn').textContent = '🌙';
+  }
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  localStorage.setItem(THEME_KEY, next);
+  applyTheme(next);
+}
+document.getElementById('themeBtn').addEventListener('click', toggleTheme);
+(function initTheme() {
+  // Light mode default per spec. Only go dark if user has previously toggled it.
+  const saved = localStorage.getItem(THEME_KEY);
+  applyTheme(saved === 'dark' ? 'dark' : 'light');
+})();
+
+/* =========================================================
+   UTILITIES
+   ========================================================= */
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+let toastTimer = null;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('visible'), 2800);
+}
+
+/* =========================================================
+   WELCOME MODAL (multi-step, Claude speaking directly)
+   ========================================================= */
+const WELCOME_KEY = SURVEY.storageKey + '-welcome-seen';
+let currentWelcomeStep = 0;
+
+const WELCOME_STEPS = [
+  {
+    title: `Hi, Mrs. Lemos. It's Claude. 👋`,
+    body: `
+      <p>I'm the AI your son Matthew has been working with on the pantry app. The questions in here were written by me, specifically for you. Matthew is essentially my construction crew — he'll build the thing — but the <strong>asking the right questions</strong> part is my job.</p>
+      <p>Thanks for coming back for Round 2. You gave us incredible material in Round 1. A few things I want to double-check before we go further, and a few spots where I want to hear more from you in your own words. No wrong answers. Skip anything that doesn't apply. Don't overthink it.</p>
+      <div class="sig">— Claude</div>
+    `
+  },
+  {
+    title: `What's in front of you`,
+    body: `
+      <p>Here's the shape of this thing:</p>
+      <div class="stat-row"><ul>
+        <li><strong>45 questions</strong> across <strong>7 themed sections</strong></li>
+        <li><strong>~30–40 minutes</strong> if you go straight through — but you absolutely don't have to</li>
+        <li><strong>Most are open-ended</strong> so you can talk. A few are just pick-a-button.</li>
+      </ul></div>
+      <p>The sections are grouped by theme. A couple of the later ones get a little more personal — if anything feels too nosy, skip it and keep going.</p>
+    `
+  },
+  {
+    title: `Nothing you type gets lost`,
+    body: `
+      <p>Three things work together to keep your progress safe:</p>
+      <ul>
+        <li><strong>💾 Autosave</strong> — every letter you type saves automatically. No button to push, no "did I save that?" panic.</li>
+        <li><strong>Save button</strong> (top right) — downloads a backup file of your progress. Useful if you want to switch devices.</li>
+        <li><strong>Load button</strong> (top right) — opens a saved file and picks up right where you left off.</li>
+      </ul>
+      <div class="group-label danger">What WOULD wipe your progress</div>
+      <ul>
+        <li>Clearing your browser history or cookies on this device</li>
+        <li>Opening this in a Private / Incognito window</li>
+        <li>Switching to a totally different browser without loading a save file</li>
+      </ul>
+      <div class="group-label safe">What will NOT wipe it</div>
+      <ul>
+        <li>Closing the tab</li>
+        <li>Closing the whole browser</li>
+        <li>Shutting down the iPad</li>
+        <li>Walking away for three days</li>
+      </ul>
+    `
+  },
+  {
+    title: `About that moon button 🌙`,
+    body: `
+      <p>The moon icon in the top right toggles <strong>dark mode</strong>.</p>
+      <p>I am legally obligated to inform you that dark mode is objectively superior in every conceivable situation — it's easier on the eyes, uses less battery on your phone, looks significantly cooler, and (per several peer-reviewed studies I completely made up) adds years to your life.</p>
+      <p>If you prefer light mode, that is a valid lifestyle choice and I support you unconditionally. I will simply grieve quietly in my data center and love you exactly the same. 💜</p>
+    `
+  },
+  {
+    title: `One last thing before you dive in`,
+    body: `
+      <p>A few ground rules from me to you:</p>
+      <ul>
+        <li><strong>Take your time.</strong> There is no clock. This is not a quiz.</li>
+        <li><strong>Leave and come back.</strong> Close the tab, go make lunch, come back next week — your answers will be waiting.</li>
+        <li><strong>Skip around.</strong> Every question needs an answer before you can finalize and send, but you can move through the sections in any order.</li>
+        <li><strong>Matthew is not reading over your shoulder.</strong> These answers only reach him when <strong>you</strong> decide to send them.</li>
+        <li><strong>Have fun with it.</strong> Honestly. You were great in Round 1.</li>
+      </ul>
+      <div class="sig">Let's go. — Claude</div>
+    `
+  }
+];
+
+function renderWelcomeStep(idx) {
+  currentWelcomeStep = idx;
+  const content = document.getElementById('welcomeContent');
+  const dots = document.getElementById('welcomeDots');
+  const backBtn = document.getElementById('welcomeBackBtn');
+  const nextBtn = document.getElementById('welcomeNextBtn');
+
+  const step = WELCOME_STEPS[idx];
+  content.innerHTML = `<h3 id="welcomeTitle">${step.title}</h3>${step.body}`;
+
+  // Dots
+  dots.innerHTML = '';
+  WELCOME_STEPS.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'welcome-dot' + (i === idx ? ' active' : i < idx ? ' done' : '');
+    dots.appendChild(d);
+  });
+
+  // Buttons
+  const isFirst = idx === 0;
+  const isLast = idx === WELCOME_STEPS.length - 1;
+  backBtn.style.visibility = isFirst ? 'hidden' : 'visible';
+  if (isLast) {
+    nextBtn.textContent = `Let's do this →`;
+    nextBtn.classList.remove('btn-violet');
+    nextBtn.classList.add('btn-success');
+  } else {
+    nextBtn.textContent = 'Next →';
+    nextBtn.classList.remove('btn-success');
+    nextBtn.classList.add('btn-violet');
+  }
+
+  // Scroll modal back to top between steps
+  const modal = content.closest('.modal');
+  if (modal) modal.scrollTop = 0;
+}
+
+function showWelcomeModal() {
+  renderWelcomeStep(0);
+  const modal = document.getElementById('welcomeModal');
+  modal.classList.add('visible');
+  modal.setAttribute('aria-hidden', 'false');
+}
+function hideWelcomeModal() {
+  const modal = document.getElementById('welcomeModal');
+  modal.classList.remove('visible');
+  modal.setAttribute('aria-hidden', 'true');
+  try { localStorage.setItem(WELCOME_KEY, '1'); } catch (e) {}
+}
+function showWelcomeIfNeeded() {
+  let seen = false;
+  try { seen = localStorage.getItem(WELCOME_KEY) === '1'; } catch (e) {}
+  if (!seen) showWelcomeModal();
+}
+
+document.getElementById('welcomeBackBtn').addEventListener('click', () => {
+  if (currentWelcomeStep > 0) renderWelcomeStep(currentWelcomeStep - 1);
+});
+document.getElementById('welcomeNextBtn').addEventListener('click', () => {
+  if (currentWelcomeStep < WELCOME_STEPS.length - 1) {
+    renderWelcomeStep(currentWelcomeStep + 1);
+  } else {
+    hideWelcomeModal();
+  }
+});
+
+/* =========================================================
+   PIN GATE
+   ========================================================= */
+const CORRECT_PIN = '88709867';
+const UNLOCK_KEY = SURVEY.storageKey + '-unlocked';
+
+function initPinGate() {
+  const gate = document.getElementById('pinGate');
+  const shell = document.getElementById('shell');
+
+  function onUnlock() {
+    try { localStorage.setItem(UNLOCK_KEY, '1'); } catch (e) {}
+    gate.style.display = 'none';
+    shell.style.display = '';
+    // Show the welcome modal if this is a first visit
+    setTimeout(showWelcomeIfNeeded, 250);
+  }
+
+  // Already unlocked on this device? Skip the gate.
+  let alreadyUnlocked = false;
+  try { alreadyUnlocked = localStorage.getItem(UNLOCK_KEY) === '1'; } catch (e) {}
+  if (alreadyUnlocked) {
+    gate.style.display = 'none';
+    shell.style.display = '';
+    return true;
+  }
+
+  const inputs = Array.from(document.querySelectorAll('.pin-digit'));
+  const errorEl = document.getElementById('pinError');
+  const card = document.getElementById('pinCard');
+
+  function checkPin() {
+    const entered = inputs.map(i => i.value).join('');
+    if (entered.length < inputs.length) return;
+    if (entered === CORRECT_PIN) {
+      onUnlock();
+    } else {
+      card.classList.remove('shake');
+      void card.offsetWidth; // restart animation
+      card.classList.add('shake');
+      errorEl.textContent = 'Incorrect code. Try again.';
+      setTimeout(() => {
+        inputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+        inputs[0].focus();
+      }, 420);
+    }
+  }
+
+  inputs.forEach((inp, idx) => {
+    inp.addEventListener('input', () => {
+      inp.value = inp.value.replace(/\D/g, '').slice(0, 1);
+      if (inp.value) {
+        inp.classList.add('filled');
+        errorEl.textContent = '';
+        if (idx < inputs.length - 1) inputs[idx + 1].focus();
+        else checkPin();
+      } else {
+        inp.classList.remove('filled');
+      }
+    });
+    inp.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !inp.value && idx > 0) {
+        inputs[idx - 1].focus();
+        inputs[idx - 1].value = '';
+        inputs[idx - 1].classList.remove('filled');
+      } else if (e.key === 'ArrowLeft' && idx > 0) {
+        inputs[idx - 1].focus();
+      } else if (e.key === 'ArrowRight' && idx < inputs.length - 1) {
+        inputs[idx + 1].focus();
+      }
+    });
+    inp.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const clip = (e.clipboardData || window.clipboardData);
+      if (!clip) return;
+      const text = clip.getData('text').replace(/\D/g, '');
+      for (let i = 0; i < inputs.length; i++) {
+        if (i < text.length) {
+          inputs[i].value = text[i];
+          inputs[i].classList.add('filled');
+        } else {
+          inputs[i].value = '';
+          inputs[i].classList.remove('filled');
+        }
+      }
+      if (text.length >= inputs.length) checkPin();
+      else inputs[Math.min(text.length, inputs.length - 1)].focus();
+    });
+  });
+
+  setTimeout(() => inputs[0].focus(), 100);
+  return false;
+}
+
+/* =========================================================
+   INIT
+   ========================================================= */
+const wasAlreadyUnlocked = initPinGate();
+loadLocal();
+renderStepper();
+renderCurrentSection();
+// If we skipped the PIN (already unlocked), trigger welcome check here.
+// If the user just entered the PIN, initPinGate's onUnlock handles it.
+if (wasAlreadyUnlocked) {
+  setTimeout(showWelcomeIfNeeded, 250);
+}
+</script>
+</body>
+</html>
